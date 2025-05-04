@@ -1,0 +1,7 @@
+*.vs
+*.mat
+*.meta
+*.asset
+[Ll]ogs/
+[Ll]ibrary/
+[Oo]bj/
