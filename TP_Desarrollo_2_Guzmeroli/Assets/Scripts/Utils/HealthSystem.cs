@@ -1,0 +1,27 @@
+using UnityEngine;
+
+public class HealthSystem : MonoBehaviour
+{
+    delegate void Dead();
+    event Dead IsDead;
+
+    [SerializeField] float health;
+    [SerializeField] float maxHealth;
+
+    public void TakeDamage(float damage)
+    {
+        if (damage < 0) damage *= -1;
+
+        health -= (health > 0) ? damage : health;
+
+        if (health <= 0)
+            IsDead?.Invoke();
+    }
+
+    public void Heal(float healing)
+    {
+        if(healing < 0) healing *= -1;
+
+        health += (health + healing <= maxHealth) ? healing : maxHealth - health;
+    }
+}
