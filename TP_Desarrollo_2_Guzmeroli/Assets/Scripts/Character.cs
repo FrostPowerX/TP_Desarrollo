@@ -15,33 +15,38 @@ public class Character : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     [SerializeField] Transform point;
+    [SerializeField] GameObject head;
 
     [SerializeField] bool onFloor;
     [SerializeField] float maxDistanceFloor;
 
     [SerializeField] string notJumpOn;
 
+    Vector2 rotation;
+    Vector2 sensivility;
+
     public bool OnFloor { get { return onFloor; } }
 
     float xRotation = 0f;
 
     bool isForceActive;
+    bool isHeadActive;
 
-
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         constantForceRequest = new ForceRequest();
         instantForceRequest = new ForceRequest();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         ConstantForce();
         FloorDetector();
+        MoveHead();
     }
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         if (!point)
             return;
@@ -67,8 +72,11 @@ public class Character : MonoBehaviour
         instantForceRequest = null;
     }
 
-    void MoveHead(Vector2 rotation, Vector2 sensivility, GameObject head)
+    void MoveHead()
     {
+        if (!isHeadActive)
+            return;
+
         float Xmouse = rotation.x;
         float mouseY = rotation.y;
 
@@ -111,11 +119,21 @@ public class Character : MonoBehaviour
 
     public void MoveHeadRequest(Vector2 rotation, Vector2 sensivility, GameObject head)
     {
-        MoveHead(rotation, sensivility, head);
+        this.head = head;
+        this.rotation = rotation;
+        this.sensivility = sensivility;
+
+        isHeadActive = true;
+        MoveHead();
     }
 
     public void CancelForce()
     {
         isForceActive = false;
+    }
+
+    public void CancelMoveHead()
+    {
+        isHeadActive = false;
     }
 }

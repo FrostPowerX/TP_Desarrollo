@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour
     InputAction jump;
     InputAction look;
 
-    private void Awake()
+    void Awake()
     {
         inputActions.Enable();
 
@@ -36,12 +37,14 @@ public class PlayerController : MonoBehaviour
         move.started += Move;
         move.canceled += CancelMove;
 
-        look.performed += Look;
+        look.started += StartLook;
+        look.performed += StartLook;
+        look.canceled += CancelLook;
 
         forceRequest = new ForceRequest();
     }
 
-    private void Update()
+    void Update()
     {
         ActualizeDirection();
     }
@@ -55,7 +58,8 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
     }
 
-    void Look(InputAction.CallbackContext cont)
+
+    void StartLook(InputAction.CallbackContext cont)
     {
         character.MoveHeadRequest(look.ReadValue<Vector2>(), Sens, head);
     }
@@ -77,11 +81,6 @@ public class PlayerController : MonoBehaviour
         character.ConstantForceRequest(forceRequest);
     }
 
-    void CancelMove(InputAction.CallbackContext cont)
-    {
-        character.CancelForce();
-    }
-
     void ActualizeDirection()
     {
         Vector2 dir = move.ReadValue<Vector2>();
@@ -90,5 +89,15 @@ public class PlayerController : MonoBehaviour
 
         forceRequest.direction.x = dir3.x;
         forceRequest.direction.z = dir3.z;
+    }
+
+    void CancelMove(InputAction.CallbackContext cont)
+    {
+        character.CancelForce();
+    }
+
+    void CancelLook(InputAction.CallbackContext cont)
+    {
+        character.CancelMoveHead();
     }
 }
