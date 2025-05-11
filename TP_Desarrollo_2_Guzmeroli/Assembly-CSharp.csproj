@@ -71,10 +71,7 @@
     <Compile Include="Assets\Scripts\Utils\SoundSO.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundManager.cs" />
-<<<<<<< Updated upstream
-=======
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
->>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\Utils\HealthSystem.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Managers\SceneController.cs" />
