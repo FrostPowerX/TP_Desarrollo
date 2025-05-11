@@ -28,6 +28,7 @@ public class PlayerController : Character
         move.canceled += CancelMove;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         look.started += StartLook;
         look.performed += StartLook;
         look.canceled += CancelLook;
@@ -38,6 +39,12 @@ public class PlayerController : Character
     void Update()
     {
         ActualizeDirection();
+=======
+        look.performed += ActualizeDirectionMovement;
+        look.performed += Look;
+
+        Cursor.lockState = CursorLockMode.Locked;
+>>>>>>> Stashed changes
 =======
         look.performed += ActualizeDirectionMovement;
         look.performed += Look;
@@ -56,12 +63,15 @@ public class PlayerController : Character
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
     void StartLook(InputAction.CallbackContext cont)
     {
         character.MoveHeadRequest(look.ReadValue<Vector2>(), Sens, head);
     }
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     void Jump(InputAction.CallbackContext cont)
@@ -75,6 +85,7 @@ public class PlayerController : Character
     void Move(InputAction.CallbackContext cont)
     {
         ConstantForceRequest();
+<<<<<<< Updated upstream
     }
 
 <<<<<<< Updated upstream
@@ -97,15 +108,31 @@ public class PlayerController : Character
     void Look(InputAction.CallbackContext cont)
     {
         lookProcces.Look(look.ReadValue<Vector2>(), sensivility, gameObject);
+=======
+>>>>>>> Stashed changes
     }
 
     void CancelMove(InputAction.CallbackContext cont)
     {
-        character.CancelForce();
+        CancelForce();
     }
 
+<<<<<<< Updated upstream
     void CancelLook(InputAction.CallbackContext cont)
     {
         character.CancelMoveHead();
+=======
+    void ActualizeDirectionMovement(InputAction.CallbackContext cont)
+    {
+        Vector2 moveDir = move.ReadValue<Vector2>();
+
+        direction = transform.right * moveDir.x + transform.forward * moveDir.y;
+
+    }
+
+    void Look(InputAction.CallbackContext cont)
+    {
+        lookProcces.Look(look.ReadValue<Vector2>(), sensivility, gameObject);
+>>>>>>> Stashed changes
     }
 }

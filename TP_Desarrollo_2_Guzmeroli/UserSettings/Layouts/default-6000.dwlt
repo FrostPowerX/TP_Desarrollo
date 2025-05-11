@@ -42,15 +42,21 @@ MonoBehaviour:
     x: 695
     y: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     width: 558
     height: 259
   m_MinSize: {x: 102, y: 126}
   m_MaxSize: {x: 4002, y: 4026}
 =======
+=======
+>>>>>>> Stashed changes
     width: 670
     height: 320
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_ActualView: {fileID: 18}
   m_Panes:
@@ -329,15 +335,21 @@ MonoBehaviour:
     x: 1253
     y: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     width: 347
     height: 761
   m_MinSize: {x: 276, y: 76}
   m_MaxSize: {x: 4001, y: 4026}
 =======
+=======
+>>>>>>> Stashed changes
     width: 416
     height: 941
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_ActualView: {fileID: 19}
   m_Panes:
@@ -408,15 +420,21 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     scrollPos: {x: 0, y: 50}
     m_SelectedIDs: 08a70000
     m_LastClickedID: 42760
     m_ExpandedIDs: 00000000d6af0000
 =======
+=======
+>>>>>>> Stashed changes
     scrollPos: {x: 0, y: 66}
     m_SelectedIDs: 62a70000
     m_LastClickedID: 42850
     m_ExpandedIDs: 0000000062a70000c8a70000cca7000000ca9a3b
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -447,7 +465,11 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_ExpandedIDs: 00000000d6af0000
+=======
+    m_ExpandedIDs: 0000000062a70000
+>>>>>>> Stashed changes
 =======
     m_ExpandedIDs: 0000000062a70000
 >>>>>>> Stashed changes
@@ -1154,7 +1176,11 @@ MonoBehaviour:
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_Target: {x: -530.32117, y: -254.61566, z: -324.1919}
+=======
+    m_Target: {x: -536.6004, y: -150.16254, z: 255.01813}
+>>>>>>> Stashed changes
 =======
     m_Target: {x: -536.6004, y: -150.16254, z: 255.01813}
 >>>>>>> Stashed changes
@@ -1206,9 +1232,15 @@ MonoBehaviour:
     m_gridOpacity: 0.5
   m_Rotation:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_Target: {x: -0.09396242, y: 0.8565719, z: -0.16812998, w: -0.47879663}
     speed: 2
     m_Value: {x: -0.117734835, y: 0.78296345, z: -0.15612583, w: -0.5905349}
+=======
+    m_Target: {x: 0.10611394, y: -0.52999264, z: 0.06738631, w: 0.83866215}
+    speed: 2
+    m_Value: {x: 0.10611142, y: -0.52998006, z: 0.067384705, w: 0.83864224}
+>>>>>>> Stashed changes
 =======
     m_Target: {x: 0.10611394, y: -0.52999264, z: 0.06738631, w: 0.83866215}
     speed: 2

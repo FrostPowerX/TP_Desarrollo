@@ -69,9 +69,15 @@
                     "initialStateCheck": false
                 },
                 {
+<<<<<<< Updated upstream
                     "name": "Back",
                     "type": "Button",
                     "id": "3c1fd647-7549-4138-9416-95d30fa328ff",
+=======
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "6370713f-438e-4aa2-82b6-bb21778683df",
+>>>>>>> Stashed changes
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -323,6 +329,7 @@
                 },
                 {
                     "name": "",
+<<<<<<< Updated upstream
                     "id": "e22c3e86-1385-4968-bd84-aa2a5bba88ae",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
@@ -351,6 +358,14 @@
                     "processors": "",
                     "groups": ";Joystick;Gamepad",
                     "action": "Back",
+=======
+                    "id": "86e7d4ce-2b2b-4e6c-bf6e-a18ded9a56f2",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
+>>>>>>> Stashed changes
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
