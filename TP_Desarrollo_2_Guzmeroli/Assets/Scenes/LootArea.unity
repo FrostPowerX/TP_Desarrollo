@@ -6799,11 +6799,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6993349164956643064, guid: 2cf69c54104a8904a916d32ef74b0f69, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 918269181820324893}
+    - target: {fileID: 6993349164956643064, guid: 2cf69c54104a8904a916d32ef74b0f69, type: 3}
+      propertyPath: notJumpOnTag
+      value: NotWalkeable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993349164956643064, guid: 2cf69c54104a8904a916d32ef74b0f69, type: 3}
+      propertyPath: notWalkeableOn
+      value: Unwalkeable
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1954820124892276539, guid: 2cf69c54104a8904a916d32ef74b0f69, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cf69c54104a8904a916d32ef74b0f69, type: 3}
+--- !u!54 &918269181820324893 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 9034705280149220126, guid: 2cf69c54104a8904a916d32ef74b0f69, type: 3}
+  m_PrefabInstance: {fileID: 918269181820324892}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4175885135603958737
 PrefabInstance:
   m_ObjectHideFlags: 0

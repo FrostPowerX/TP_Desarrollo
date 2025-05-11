@@ -20,9 +20,19 @@ public class SceneController : Singleton<SceneController>
         StartCoroutine(LoadAsynchronously(index, LoadSceneMode.Single));
     }
 
+    public void LoadSceneAsyncSingle(string name)
+    {
+        StartCoroutine(LoadAsynchronously(name, LoadSceneMode.Single));
+    }
+
     public void LoadSceneAsyncAdditive(int index)
     {
         StartCoroutine(LoadAsynchronously(index, LoadSceneMode.Additive));
+    }
+
+    public void LoadSceneAsyncAdditive(string name)
+    {
+        StartCoroutine(LoadAsynchronously(name, LoadSceneMode.Additive));
     }
 
     public void UnloadScene(int index)
@@ -38,6 +48,18 @@ public class SceneController : Singleton<SceneController>
     IEnumerator LoadAsynchronously(int sceneIndex, LoadSceneMode mode)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex, mode);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / .9f);
+
+            yield return null;
+        }
+    }
+
+    IEnumerator LoadAsynchronously(string sceneName, LoadSceneMode mode)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, mode);
 
         while (!operation.isDone)
         {

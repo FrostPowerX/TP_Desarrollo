@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 492557916615615000}
   - component: {fileID: 8052401854818275221}
   - component: {fileID: 7897849564365493687}
+  - component: {fileID: 1457073823848353847}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -245,6 +246,19 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1457073823848353847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915099289219876468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96398c61c1dddf34ca38a6145e4aa078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invert: 0
 --- !u!1 &5723881017910749512
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +412,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4808387990740799745}
   - component: {fileID: 9034705280149220126}
-  - component: {fileID: 1954820124892276539}
   - component: {fileID: 6993349164956643064}
   m_Layer: 0
   m_Name: Player
@@ -451,31 +464,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &1954820124892276539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6897336312924034541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c70610369f8c81489b6925c5c73ec3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  constantForceRequest:
-    direction: {x: 0, y: 0, z: 0}
-    force: 0
-    speed: 0
-  instantForceRequest:
-    direction: {x: 0, y: 0, z: 0}
-    force: 0
-    speed: 0
-  rb: {fileID: 9034705280149220126}
-  point: {fileID: 8977469306541701440}
-  onFloor: 0
-  maxDistanceFloor: 0.2
-  notJumpOn: Unwalkeable
 --- !u!114 &6993349164956643064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,14 +476,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bc5ec3102f889499ffb097968218c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 1915099289219876468}
-  inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  character: {fileID: 1954820124892276539}
-  forceRequest:
-    direction: {x: 0, y: 0, z: 0}
-    force: 0
-    speed: 0
-  Sens: {x: 30, y: 30}
+  rb: {fileID: 9034705280149220126}
+  point: {fileID: 8977469306541701440}
+  onFloor: 0
+  maxDistanceFloor: 0.3
+  notJumpOnTag: 
   force: 10
   jumpForce: 5
   speed: 20
+  inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  lookProcces: {fileID: 1457073823848353847}
+  sensivility: {x: 30, y: 30}

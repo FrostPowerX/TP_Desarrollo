@@ -29,17 +29,26 @@ public class Weapon : MonoBehaviour, Interacteable<Weapon>
     [SerializeField] int ammo;
     [SerializeField] int maxAmmo;
 
+    [SerializeField] int defaultBulletsCount;
+
     [SerializeField] GameObject bullet;
     [SerializeField] List<GameObject> bulletPool;
 
-    [SerializeField] Transform point;
+    [SerializeField] Transform spawnPoint;
 
+    private void Awake()
+    {
+        for (int i = 0; i < defaultBulletsCount; i++)
+        {
+            bulletPool.Add(Instantiate(bullet, transform));
+        }
+    }
 
     void ShootRay()
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(point.position, point.forward, out hit, maxDistance))
+        if (Physics.Raycast(spawnPoint.position, spawnPoint.forward, out hit, maxDistance))
         {
             HealthSystem objetive = hit.transform.GetComponent<HealthSystem>();
 

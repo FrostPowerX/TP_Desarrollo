@@ -2,23 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Character))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Character
 {
-    [SerializeField] GameObject head;
-
     [SerializeField] InputActionAsset inputActions;
-    [SerializeField] Character character;
+    [SerializeField] LookProcces lookProcces;
 
-    [SerializeField] ForceRequest forceRequest;
-
-    [SerializeField] Vector2 Sens;
-
-    [SerializeField] float force;
-    [SerializeField] float jumpForce;
-    [SerializeField] float speed;
-
-    Vector3 dir3;
+    [SerializeField] Vector2 sensivility;
 
     InputAction move;
     InputAction jump;
@@ -35,8 +24,10 @@ public class PlayerController : MonoBehaviour
         jump.started += Jump;
 
         move.started += Move;
+        move.started += ActualizeDirectionMovement;
         move.canceled += CancelMove;
 
+<<<<<<< Updated upstream
         look.started += StartLook;
         look.performed += StartLook;
         look.canceled += CancelLook;
@@ -47,6 +38,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ActualizeDirection();
+=======
+        look.performed += ActualizeDirectionMovement;
+        look.performed += Look;
+
+        Cursor.lockState = CursorLockMode.Locked;
+>>>>>>> Stashed changes
     }
 
     [ContextMenu("LockMouse")]
@@ -58,37 +55,48 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
     }
 
+<<<<<<< Updated upstream
 
     void StartLook(InputAction.CallbackContext cont)
     {
         character.MoveHeadRequest(look.ReadValue<Vector2>(), Sens, head);
     }
 
+=======
+>>>>>>> Stashed changes
     void Jump(InputAction.CallbackContext cont)
     {
-        if (!character.OnFloor)
+        if (!OnFloor)
             return;
 
-        ForceRequest request = new ForceRequest(Vector3.up, jumpForce, speed);
-        forceRequest.speed = speed;
-        character.InstantForceRequest(request);
+        InstantForceRequest();
     }
 
     void Move(InputAction.CallbackContext cont)
     {
-        forceRequest.force = force;
-        forceRequest.speed = speed;
-        character.ConstantForceRequest(forceRequest);
+        ConstantForceRequest();
     }
 
+<<<<<<< Updated upstream
     void ActualizeDirection()
+=======
+    void CancelMove(InputAction.CallbackContext cont)
     {
-        Vector2 dir = move.ReadValue<Vector2>();
+        CancelForce();
+    }
 
-        dir3 = transform.right * dir.x + transform.forward * dir.y;
+    void ActualizeDirectionMovement(InputAction.CallbackContext cont)
+>>>>>>> Stashed changes
+    {
+        Vector2 moveDir = move.ReadValue<Vector2>();
 
-        forceRequest.direction.x = dir3.x;
-        forceRequest.direction.z = dir3.z;
+        direction = transform.right * moveDir.x + transform.forward * moveDir.y;
+
+    }
+
+    void Look(InputAction.CallbackContext cont)
+    {
+        lookProcces.Look(look.ReadValue<Vector2>(), sensivility, gameObject);
     }
 
     void CancelMove(InputAction.CallbackContext cont)
