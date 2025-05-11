@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 670
     height: 320
-  m_MinSize: {x: 102, y: 126}
-  m_MaxSize: {x: 4002, y: 4026}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -323,8 +323,8 @@ MonoBehaviour:
     y: 0
     width: 416
     height: 941
-  m_MinSize: {x: 276, y: 76}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -396,7 +396,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 66}
     m_SelectedIDs: 62a70000
     m_LastClickedID: 42850
+<<<<<<< Updated upstream
     m_ExpandedIDs: 00000000daa70000
+=======
+    m_ExpandedIDs: 0000000062a70000c8a70000cca7000000ca9a3b
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -425,7 +429,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< Updated upstream
     m_ExpandedIDs: 00000000daa70000
+=======
+    m_ExpandedIDs: 0000000062a70000
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1128,7 +1136,11 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
+<<<<<<< Updated upstream
     m_Target: {x: 0, y: 0, z: 0}
+=======
+    m_Target: {x: -536.6004, y: -150.16254, z: 255.01813}
+>>>>>>> Stashed changes
     speed: 2
     m_Value: {x: -536.6004, y: -150.16254, z: 255.01813}
   m_RenderMode: 0
@@ -1176,11 +1188,19 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< Updated upstream
     m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
     speed: 2
     m_Value: {x: 0.10611142, y: -0.52998006, z: 0.067384705, w: 0.83864224}
   m_Size:
     m_Target: 10
+=======
+    m_Target: {x: 0.10611394, y: -0.52999264, z: 0.06738631, w: 0.83866215}
+    speed: 2
+    m_Value: {x: 0.10611142, y: -0.52998006, z: 0.067384705, w: 0.83864224}
+  m_Size:
+    m_Target: 311.46744
+>>>>>>> Stashed changes
     speed: 2
     m_Value: 311.46744
   m_Ortho:
