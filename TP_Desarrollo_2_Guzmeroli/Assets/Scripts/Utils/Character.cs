@@ -1,7 +1,4 @@
-using NUnit.Framework.Constraints;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 /// <summary>
 /// Move the character with a controller
