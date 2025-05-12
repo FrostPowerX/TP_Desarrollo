@@ -1,21 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum WeaponType
+public enum WeaponFireType
 {
     None,
     Ray,
     Spawn
 }
 
-enum AmmoType
+public enum AmmoType
 {
     None,
     primary,
     secondary
 }
 
-public class Weapon : MonoBehaviour, Interacteable<Weapon>
+public enum WeaponType
+{
+    None,
+    Primary,
+    Secondary,
+    Melee
+}
+
+public class Weapon : MonoBehaviour, IInteractable<Weapon>
 {
     [SerializeField] float damage;
     [SerializeField] float fireRate;
@@ -24,6 +32,7 @@ public class Weapon : MonoBehaviour, Interacteable<Weapon>
     [SerializeField] float maxDistance;
 
     [SerializeField] WeaponType type;
+    [SerializeField] WeaponFireType fireType;
     [SerializeField] AmmoType ammoType;
 
     [SerializeField] int ammo;
@@ -36,7 +45,9 @@ public class Weapon : MonoBehaviour, Interacteable<Weapon>
 
     [SerializeField] Transform spawnPoint;
 
-    private void Awake()
+    public WeaponType Type { get { return type; } }
+
+    void Awake()
     {
         for (int i = 0; i < defaultBulletsCount; i++)
         {
@@ -67,13 +78,13 @@ public class Weapon : MonoBehaviour, Interacteable<Weapon>
     public void Fire()
     {
         if (ammo > 0)
-            switch (type)
+            switch (fireType)
             {
-                case WeaponType.Ray:
+                case WeaponFireType.Ray:
                     ShootRay();
                     break;
 
-                case WeaponType.Spawn:
+                case WeaponFireType.Spawn:
                     ShootBullet();
                     break;
 
