@@ -1,7 +1,10 @@
 
 using System;
+using UnityEngine;
 
-public interface IInteractable<T>
+public interface IInteractable
 {
-    public T OnInteract();
+    public void OnInteract(GameObject owner);
+
+    public bool IsInteracteable();
 }

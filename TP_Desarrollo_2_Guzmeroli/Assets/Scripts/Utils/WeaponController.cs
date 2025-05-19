@@ -31,7 +31,7 @@ public class WeaponController : MonoBehaviour
         drop.started += DropWeapon;
     }
 
-    private void FireWeapon(InputAction.CallbackContext context)
+    void FireWeapon(InputAction.CallbackContext context)
     {
         switch (activeWeapon)
         {
@@ -50,6 +50,54 @@ public class WeaponController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    void DropWeapon(InputAction.CallbackContext context)
+    {
+        switch (activeWeapon)
+        {
+            case WeaponType.Primary:
+
+                primary.transform.position = weaponPos.forward;
+
+                primary.transform.SetParent(null, true);
+                primary.OnDrop();
+
+                primary = null;
+                break;
+
+            case WeaponType.Secondary:
+
+                secondary.transform.position = weaponPos.forward;
+
+                secondary.transform.SetParent(null, true);
+                secondary.OnDrop();
+
+                secondary = null;
+                break;
+
+            case WeaponType.Melee:
+
+                melee.transform.position = weaponPos.forward;
+
+                melee.transform.SetParent(null, true);
+                melee.OnDrop();
+
+                melee = null;
+                break;
+
+            default:
+                break;
+        }
+
+        if (primary)
+            SelectWeapon(WeaponType.Primary);
+        else if (secondary)
+            SelectWeapon(WeaponType.Secondary);
+        else if (melee)
+            SelectWeapon(WeaponType.Melee);
+        else
+            SelectWeapon(WeaponType.None);
     }
 
     void SelectWeapon(WeaponType weapon)
@@ -105,40 +153,24 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    void DropWeapon(InputAction.CallbackContext context)
+    void ScrollUp()
     {
-        switch (activeWeapon)
-        {
-            case WeaponType.Primary:
+        WeaponType actualWeapon = activeWeapon;
 
-                primary.transform.SetParent(null, false);
-                primary = null;
-                break;
-
-            case WeaponType.Secondary:
-
-                secondary.transform.SetParent(null, false);
-                secondary = null;
-                break;
-
-            case WeaponType.Melee:
-
-                melee.transform.SetParent(null, false);
-                melee = null;
-                break;
-
-            default:
-                break;
-        }
-
-        if (primary)
+        if (actualWeapon == WeaponType.Melee)
             SelectWeapon(WeaponType.Primary);
-        else if (secondary)
-            SelectWeapon(WeaponType.Secondary);
-        else if (melee)
+        else
+            SelectWeapon((WeaponType)((int)actualWeapon + 1));
+    }
+
+    void ScrollDown()
+    {
+        WeaponType actualWeapon = activeWeapon;
+
+        if (actualWeapon == WeaponType.Primary)
             SelectWeapon(WeaponType.Melee);
         else
-            SelectWeapon(WeaponType.None);
+            SelectWeapon((WeaponType)((int)actualWeapon - 1));
     }
 
     public void EquipWeapon(Weapon newWeapon)
@@ -150,8 +182,8 @@ public class WeaponController : MonoBehaviour
                     return;
 
                 primary = newWeapon;
-                primary.transform.SetParent(weaponPos, true);
-                primary.transform.position = Vector3.zero;
+                primary.transform.SetParent(weaponPos, false);
+                primary.transform.localPosition = Vector3.zero;
                 break;
 
             case WeaponType.Secondary:
@@ -159,8 +191,8 @@ public class WeaponController : MonoBehaviour
                     return;
 
                 secondary = newWeapon;
-                secondary.transform.SetParent(weaponPos, true);
-                secondary.transform.position = Vector3.zero;
+                secondary.transform.SetParent(weaponPos, false);
+                secondary.transform.localPosition = Vector3.zero;
                 break;
 
             case WeaponType.Melee:
@@ -168,8 +200,8 @@ public class WeaponController : MonoBehaviour
                     return;
 
                 melee = newWeapon;
-                melee.transform.SetParent(weaponPos, true);
-                melee.transform.position = Vector3.zero;
+                melee.transform.SetParent(weaponPos, false);
+                melee.transform.localPosition = Vector3.zero;
                 break;
         }
     }

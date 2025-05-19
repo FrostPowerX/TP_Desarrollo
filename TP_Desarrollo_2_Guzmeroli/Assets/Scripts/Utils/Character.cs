@@ -57,9 +57,9 @@ public class Character : MonoBehaviour
         rb.AddForce(direction * force * percentActualForce, ForceMode.Force);
     }
 
-    void InstantForce()
+    void InstantForce(Vector3 dir)
     {
-        rb.AddForce(direction * force, ForceMode.Impulse);
+        rb.AddForce(dir * force, ForceMode.Impulse);
     }
 
     
@@ -85,9 +85,9 @@ public class Character : MonoBehaviour
         isForceActive = true;
     }
 
-    protected void InstantForceRequest()
+    protected void InstantForceRequest(Vector3 dir)
     {
-        InstantForce();
+        InstantForce(dir);
     }
 
     protected void CancelForce()

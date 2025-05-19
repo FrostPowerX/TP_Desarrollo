@@ -23,13 +23,16 @@ public class PlayerController : Character
         jump.started += Jump;
 
         move.started += Move;
-        move.started += ActualizeDirectionMovement;
         move.canceled += CancelMove;
 
-        look.performed += ActualizeDirectionMovement;
         look.performed += Look;
 
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        ActualizeDirectionMovement();
     }
 
     [ContextMenu("LockMouse")]
@@ -46,7 +49,7 @@ public class PlayerController : Character
         if (!OnFloor)
             return;
 
-        InstantForceRequest();
+        InstantForceRequest(Vector3.up);
     }
 
     void Move(InputAction.CallbackContext cont)
@@ -59,12 +62,11 @@ public class PlayerController : Character
         CancelForce();
     }
 
-    void ActualizeDirectionMovement(InputAction.CallbackContext cont)
+    void ActualizeDirectionMovement()
     {
         Vector2 moveDir = move.ReadValue<Vector2>();
 
         direction = transform.right * moveDir.x + transform.forward * moveDir.y;
-
     }
 
     void Look(InputAction.CallbackContext cont)

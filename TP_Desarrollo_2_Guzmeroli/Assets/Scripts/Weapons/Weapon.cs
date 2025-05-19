@@ -23,7 +23,7 @@ public enum WeaponType
     Melee
 }
 
-public class Weapon : MonoBehaviour, IInteractable<Weapon>
+public class Weapon : MonoBehaviour, IInteractable
 {
     [SerializeField] float damage;
     [SerializeField] float fireRate;
@@ -40,10 +40,16 @@ public class Weapon : MonoBehaviour, IInteractable<Weapon>
 
     [SerializeField] int defaultBulletsCount;
 
+    [SerializeField] Rigidbody rb;
+
     [SerializeField] GameObject bullet;
     [SerializeField] List<GameObject> bulletPool;
 
     [SerializeField] Transform spawnPoint;
+
+    [SerializeField] bool interactActive;
+
+    float lastFireTime = 0f;
 
     public WeaponType Type { get { return type; } }
 
@@ -68,15 +74,20 @@ public class Weapon : MonoBehaviour, IInteractable<Weapon>
                 objetive.TakeDamage(damage);
             }
         }
+
+        ammo--;
     }
 
     void ShootBullet()
     {
-
+        ammo--;
     }
 
     public void Fire()
     {
+        if (Time.time < lastFireTime + fireRate)
+            return;
+
         if (ammo > 0)
             switch (fireType)
             {
@@ -92,6 +103,8 @@ public class Weapon : MonoBehaviour, IInteractable<Weapon>
                     Debug.LogWarning($"{this.name} no tiene un WeaponType asignado.");
                     break;
             }
+
+        lastFireTime = Time.time;
     }
 
     public void Reload(int ammo)
@@ -111,8 +124,31 @@ public class Weapon : MonoBehaviour, IInteractable<Weapon>
 
     }
 
-    public Weapon OnInteract()
+    public void OnDrop()
     {
-        return this;
+        interactActive = true;
+        rb.useGravity = true;
+    }
+
+    public void OnInteract(GameObject owner)
+    {
+        WeaponController wpc = owner.GetComponent<WeaponController>();
+
+        if (wpc)
+        {
+            wpc.EquipWeapon(this);
+            interactActive = false;
+            rb.useGravity = false;
+        }
+    }
+
+    public bool IsInteracteable()
+    {
+        return interactActive;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(spawnPoint.position, spawnPoint.forward * maxDistance, Color.yellow);
     }
 }
