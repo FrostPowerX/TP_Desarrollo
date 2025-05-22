@@ -14,6 +14,7 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] int ammoPrimary;
     [SerializeField] int ammoSecondary;
+    [SerializeField] float offSetDrop;
 
     [SerializeField] InputActionAsset actionMap;
 
@@ -54,11 +55,14 @@ public class WeaponController : MonoBehaviour
 
     void DropWeapon(InputAction.CallbackContext context)
     {
+        Vector3 dropPos = weaponPos.position + weaponPos.forward * offSetDrop;
+
         switch (activeWeapon)
         {
             case WeaponType.Primary:
 
-                primary.transform.position = weaponPos.forward;
+                primary.transform.position = dropPos;
+                primary.transform.rotation = Quaternion.LookRotation(transform.forward);
 
                 primary.transform.SetParent(null, true);
                 primary.OnDrop();
@@ -68,7 +72,8 @@ public class WeaponController : MonoBehaviour
 
             case WeaponType.Secondary:
 
-                secondary.transform.position = weaponPos.forward;
+                secondary.transform.position = dropPos;
+                secondary.transform.rotation = Quaternion.LookRotation(transform.forward);
 
                 secondary.transform.SetParent(null, true);
                 secondary.OnDrop();
@@ -78,7 +83,8 @@ public class WeaponController : MonoBehaviour
 
             case WeaponType.Melee:
 
-                melee.transform.position = weaponPos.forward;
+                melee.transform.position = dropPos;
+                melee.transform.rotation = Quaternion.LookRotation(transform.forward);
 
                 melee.transform.SetParent(null, true);
                 melee.OnDrop();
@@ -175,6 +181,8 @@ public class WeaponController : MonoBehaviour
 
     public void EquipWeapon(Weapon newWeapon)
     {
+        bool equiped = false;
+
         switch (newWeapon.Type)
         {
             case WeaponType.Primary:
@@ -182,8 +190,7 @@ public class WeaponController : MonoBehaviour
                     return;
 
                 primary = newWeapon;
-                primary.transform.SetParent(weaponPos, false);
-                primary.transform.localPosition = Vector3.zero;
+                equiped = true;
                 break;
 
             case WeaponType.Secondary:
@@ -191,8 +198,7 @@ public class WeaponController : MonoBehaviour
                     return;
 
                 secondary = newWeapon;
-                secondary.transform.SetParent(weaponPos, false);
-                secondary.transform.localPosition = Vector3.zero;
+                equiped = true;
                 break;
 
             case WeaponType.Melee:
@@ -200,9 +206,15 @@ public class WeaponController : MonoBehaviour
                     return;
 
                 melee = newWeapon;
-                melee.transform.SetParent(weaponPos, false);
-                melee.transform.localPosition = Vector3.zero;
+                equiped = true;
                 break;
+        }
+
+        if(equiped)
+        {
+            newWeapon.transform.SetParent(weaponPos, false);
+            newWeapon.transform.position = weaponPos.position;
+            newWeapon.transform.rotation = weaponPos.rotation;
         }
     }
 }

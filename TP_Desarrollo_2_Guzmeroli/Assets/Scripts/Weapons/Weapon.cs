@@ -128,6 +128,8 @@ public class Weapon : MonoBehaviour, IInteractable
     {
         interactActive = true;
         rb.useGravity = true;
+        rb.isKinematic = false;
+        gameObject.GetComponent<Collider>().enabled = true;
     }
 
     public void OnInteract(GameObject owner)
@@ -139,6 +141,8 @@ public class Weapon : MonoBehaviour, IInteractable
             wpc.EquipWeapon(this);
             interactActive = false;
             rb.useGravity = false;
+            rb.isKinematic = true;
+            gameObject.GetComponent<Collider>().enabled = false;
         }
     }
 
