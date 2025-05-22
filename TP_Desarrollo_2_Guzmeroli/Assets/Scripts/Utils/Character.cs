@@ -7,22 +7,26 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Character : MonoBehaviour
 {
-    [SerializeField] Rigidbody rb;
+    [SerializeField] protected Rigidbody rb;
 
-    [SerializeField] Transform point;
+    [SerializeField] protected Transform point;
 
-    [SerializeField] bool onFloor;
-    [SerializeField] float maxDistanceFloor;
-
-    [SerializeField] string notWalkeableOn;
+    [SerializeField] protected string notWalkeableOn;
 
     [SerializeField] protected float force;
     [SerializeField] protected float jumpForce;
     [SerializeField] protected float speed;
+    [SerializeField] protected float rotationVel;
+    [SerializeField] protected float maxDistanceFloor;
+
+    [SerializeField] protected bool onFloor;
+
 
     bool isForceActive;
 
     protected Vector3 direction;
+
+    protected Quaternion rotation;
 
     public bool OnFloor { get { return onFloor; } }
 
@@ -46,6 +50,8 @@ public class Character : MonoBehaviour
         Gizmos.DrawLine(point.position, point.position + new Vector3(0, maxDistanceFloor * -1, 0));
     }
 
+
+
     void ConstantForce()
     {
         if (!isForceActive)
@@ -62,8 +68,6 @@ public class Character : MonoBehaviour
         rb.AddForce(dir * force, ForceMode.Impulse);
     }
 
-    
-
     void FloorDetector()
     {
         RaycastHit hit;
@@ -79,6 +83,11 @@ public class Character : MonoBehaviour
                 onFloor = false;
     }
 
+    protected void RotateTo(Vector3 dir)
+    {
+        Quaternion rotationPrev = Quaternion.LookRotation(dir);
+        rotation = Quaternion.RotateTowards(rb.rotation, rotationPrev, rotationVel * Time.deltaTime);
+    }
 
     protected void ConstantForceRequest()
     {
