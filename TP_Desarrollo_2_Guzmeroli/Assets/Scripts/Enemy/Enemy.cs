@@ -1,4 +1,3 @@
-using NUnit.Framework.Constraints;
 using UnityEngine;
 
 enum MovementType
@@ -22,7 +21,15 @@ public class Enemy : Character
 
     [SerializeField] bool canTarget;
 
+    HealthSystem health;
 
+    private void Start()
+    {
+        health = GetComponent<HealthSystem>();
+
+        if (health)
+            health.OnDeath += Kill;
+    }
 
     void Update()
     {
@@ -38,13 +45,13 @@ public class Enemy : Character
                 case MovementType.Patrol:
                     PatrolMode();
                     break;
-            }
-    }
 
-    void Rotate()
-    {
-        if (direction != Vector3.zero)
-            rb.MoveRotation(rotation);
+                case MovementType.None:
+                    CancelForce();
+                    break;
+            }
+
+        RotateTo(direction);
     }
 
     void SeekMode()
@@ -54,6 +61,8 @@ public class Enemy : Character
 
     void PatrolMode()
     {
+        ConstantForceRequest();
+
         if (Vector3.Magnitude(firstPos - transform.position) < 1f && goPos == 1)
             goPos = 2;
         else if (Vector3.Magnitude(secondPos - transform.position) < 1f && goPos == 2)
@@ -69,10 +78,8 @@ public class Enemy : Character
     {
         direction = Vector3.Normalize(target.transform.position - transform.position);
         Vector3 dir = direction;
-        dir.y = 0;
 
         RotateTo(dir);
-        Rotate();
     }
 
     void SetTarget(Collider other)
@@ -85,6 +92,17 @@ public class Enemy : Character
             target = other.gameObject;
             ConstantForceRequest();
         }
+    }
+
+    void Kill()
+    {
+        gameObject.SetActive(false);
+    }
+
+    [ContextMenu("Revive")]
+    public void Revive()
+    {
+        gameObject.SetActive(true);
     }
 
     void OnTriggerEnter(Collider other)
