@@ -555,9 +555,9 @@ MonoBehaviour:
   primary: {fileID: 0}
   secondary: {fileID: 0}
   melee: {fileID: 0}
-  ammoPrimary: 0
-  ammoSecondary: 0
-  offSetDrop: 1
+  ammoPrimary: 100
+  ammoSecondary: 100
+  offSetDrop: 0.3
 --- !u!114 &-6316363268899245264
 MonoBehaviour:
   m_ObjectHideFlags: 0
