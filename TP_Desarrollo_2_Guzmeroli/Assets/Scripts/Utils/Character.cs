@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] protected Rigidbody rb;
 
-    [SerializeField] protected Transform point;
+    [SerializeField] protected Transform floorDetectorPoint;
 
     [SerializeField] protected string notWalkeableOn;
 
@@ -22,12 +22,13 @@ public class Character : MonoBehaviour
     [SerializeField] protected bool onFloor;
 
 
-    bool isForceActive;
+    [SerializeField] bool isForceActive;
 
     protected Vector3 direction;
 
-    protected Quaternion rotation;
+    Quaternion rotation;
 
+    bool isRotating;
     public bool OnFloor { get { return onFloor; } }
 
     void Awake()
@@ -39,18 +40,28 @@ public class Character : MonoBehaviour
     {
         ConstantForce();
         FloorDetector();
+        Rotate();
     }
 
     void OnDrawGizmos()
     {
-        if (!point)
+        if (!floorDetectorPoint)
             return;
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(point.position, point.position + new Vector3(0, maxDistanceFloor * -1, 0));
+        Gizmos.DrawLine(floorDetectorPoint.position, floorDetectorPoint.position + new Vector3(0, maxDistanceFloor * -1, 0));
     }
 
 
+    void Rotate()
+    {
+        if (direction != Vector3.zero && isRotating)
+        {
+            rotation = rotation.normalized;
+            rb.MoveRotation(rotation);
+            isRotating = false;
+        }
+    }
 
     void ConstantForce()
     {
@@ -65,28 +76,32 @@ public class Character : MonoBehaviour
 
     void InstantForce(Vector3 dir)
     {
-        rb.AddForce(dir * force, ForceMode.Impulse);
+        rb.AddForce(dir * jumpForce, ForceMode.Impulse);
     }
 
     void FloorDetector()
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(point.position, Vector3.down, out hit, maxDistanceFloor))
+        if (Physics.Raycast(floorDetectorPoint.position, Vector3.down, out hit, maxDistanceFloor))
         {
-            if(hit.transform && !hit.transform.CompareTag(notWalkeableOn))
+            if (hit.transform && !hit.transform.CompareTag(notWalkeableOn))
             {
                 onFloor = true;
             }
         }
         else
-                onFloor = false;
+            onFloor = false;
     }
 
     protected void RotateTo(Vector3 dir)
     {
+        dir.y = 0;
+
         Quaternion rotationPrev = Quaternion.LookRotation(dir);
         rotation = Quaternion.RotateTowards(rb.rotation, rotationPrev, rotationVel * Time.deltaTime);
+
+        isRotating = true;
     }
 
     protected void ConstantForceRequest()
