@@ -51,7 +51,8 @@ public class Enemy : Character
                     break;
             }
 
-        RotateTo(direction);
+        if (direction != Vector3.zero)
+            RotateTo(direction);
     }
 
     void SeekMode()

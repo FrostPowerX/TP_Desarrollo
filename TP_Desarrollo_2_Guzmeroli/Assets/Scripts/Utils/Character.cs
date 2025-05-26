@@ -29,6 +29,8 @@ public class Character : MonoBehaviour
     Quaternion rotation;
 
     bool isRotating;
+
+    public bool IsWalking { get { return isForceActive; } }
     public bool OnFloor { get { return onFloor; } }
 
     void Awake()
@@ -43,6 +45,8 @@ public class Character : MonoBehaviour
         Rotate();
     }
 
+#if DEBUG
+
     void OnDrawGizmos()
     {
         if (!floorDetectorPoint)
@@ -52,6 +56,7 @@ public class Character : MonoBehaviour
         Gizmos.DrawLine(floorDetectorPoint.position, floorDetectorPoint.position + new Vector3(0, maxDistanceFloor * -1, 0));
     }
 
+#endif
 
     void Rotate()
     {

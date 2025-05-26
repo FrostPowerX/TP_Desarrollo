@@ -9,20 +9,28 @@ public class AnimatorController : MonoBehaviour
     [SerializeField] string idleName;
     [SerializeField] string walkingName;
 
-    HealthSystem health;
-
-
+    [SerializeField] HealthSystem health;
+    [SerializeField] Character character;
 
     private void Awake()
     {
-        health = GetComponent<HealthSystem>();
-
         if (health)
             health.OnDeath += PlayDeath;
+    }
+
+    private void Update()
+    {
+        if (character)
+            PlayWalking();
     }
 
     private void PlayDeath()
     {
         animator.SetTrigger(deadName);
+    }
+
+    void PlayWalking()
+    {
+        animator.SetBool(walkingName, character.IsWalking);
     }
 }

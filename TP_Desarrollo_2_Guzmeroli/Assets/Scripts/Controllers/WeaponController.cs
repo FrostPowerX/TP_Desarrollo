@@ -120,6 +120,10 @@ public class WeaponController : MonoBehaviour
                             if (melee)
                                 pass = true;
                             break;
+
+                        case WeaponType.None:
+                            pass = true;
+                            break;
                     }
 
                 if (!pass)
@@ -179,6 +183,7 @@ public class WeaponController : MonoBehaviour
 
         if (equiped)
         {
+            newWeapon.gameObject.layer = 3;
             newWeapon.SetSpawnPoint(weaponTrace);
             newWeapon.transform.SetParent(weaponPos, false);
             newWeapon.transform.position = weaponPos.position;
@@ -262,6 +267,7 @@ public class WeaponController : MonoBehaviour
                 primary.transform.position = dropPos;
                 primary.transform.rotation = Quaternion.LookRotation(transform.forward);
 
+                primary.gameObject.layer = 0;
                 primary.transform.SetParent(null, true);
                 primary.OnDrop();
 
@@ -276,6 +282,7 @@ public class WeaponController : MonoBehaviour
                 secondary.transform.position = dropPos;
                 secondary.transform.rotation = Quaternion.LookRotation(transform.forward);
 
+                secondary.gameObject.layer = 0;
                 secondary.transform.SetParent(null, true);
                 secondary.OnDrop();
 
@@ -290,6 +297,7 @@ public class WeaponController : MonoBehaviour
                 melee.transform.position = dropPos;
                 melee.transform.rotation = Quaternion.LookRotation(transform.forward);
 
+                melee.gameObject.layer = 0;
                 melee.transform.SetParent(null, true);
                 melee.OnDrop();
 

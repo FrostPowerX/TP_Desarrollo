@@ -29,22 +29,23 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        currentLifeTime -= (currentLifeTime > 0) ? Time.deltaTime: currentLifeTime;
+        currentLifeTime -= (currentLifeTime > 0) ? Time.deltaTime : currentLifeTime;
 
         if (currentLifeTime <= 0)
             DisableBullet();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         HealthSystem hs;
+        hs = other.transform.GetComponent<HealthSystem>();
 
-        if (hs = collision.transform.GetComponent<HealthSystem>())
+        if (hs)
         {
             hs.TakeDamage(damage);
+            DisableBullet();
         }
 
-        DisableBullet();
     }
 
     public void Fire()
@@ -53,7 +54,7 @@ public class Bullet : MonoBehaviour
     }
 
     public void SetForce(float force) => this.force = force;
-    public void SetDamage( float damage) => this.damage = damage;
+    public void SetDamage(float damage) => this.damage = damage;
 
     public void EnableBullet()
     {
@@ -64,6 +65,8 @@ public class Bullet : MonoBehaviour
 
     public void DisableBullet()
     {
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         isEnable = false;
         gameObject.SetActive(false);
     }
