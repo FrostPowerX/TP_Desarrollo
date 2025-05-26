@@ -54,8 +54,12 @@ public class InteractController : MonoBehaviour
             lastInteract.OnInteract(gameObject);
     }
 
+#if DEBUG
+
     private void OnDrawGizmos()
     {
         Debug.DrawRay(startPos.position, startPos.forward * maxDistance, rayColor);
     }
+
+#endif
 }
