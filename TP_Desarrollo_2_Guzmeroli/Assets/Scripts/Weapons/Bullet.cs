@@ -14,10 +14,26 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] float damage;
     [SerializeField] float force;
+    [SerializeField] float lifeTime;
+
+    float currentLifeTime;
 
     bool isEnable;
 
     public bool IsEnable { get { return isEnable; } }
+
+    private void Awake()
+    {
+        currentLifeTime = lifeTime;
+    }
+
+    private void Update()
+    {
+        currentLifeTime -= (currentLifeTime > 0) ? Time.deltaTime: currentLifeTime;
+
+        if (currentLifeTime <= 0)
+            DisableBullet();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -43,6 +59,7 @@ public class Bullet : MonoBehaviour
     {
         isEnable = true;
         gameObject.SetActive(true);
+        currentLifeTime = lifeTime;
     }
 
     public void DisableBullet()

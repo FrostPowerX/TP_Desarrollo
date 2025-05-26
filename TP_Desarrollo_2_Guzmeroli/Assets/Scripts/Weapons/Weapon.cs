@@ -23,8 +23,15 @@ public enum WeaponType
     Melee
 }
 
+[RequireComponent(typeof(Rigidbody))]
 public class Weapon : MonoBehaviour, IInteractable
 {
+    public delegate void FireAction();
+    public event FireAction Fired;
+
+    public delegate void ReloadAction();
+    public event ReloadAction Reloaded;
+
     [SerializeField] float damage;
     [SerializeField] float fireRate;
     [SerializeField] float reloadTime;
@@ -45,27 +52,59 @@ public class Weapon : MonoBehaviour, IInteractable
     [SerializeField] GameObject bullet;
     [SerializeField] List<GameObject> bulletPool;
 
-    [SerializeField] Transform spawnPoint;
+    [SerializeField] Transform bulletSpawnPoint;
+    [SerializeField] Transform defaultPoint;
+
+    [SerializeField] Vector3 offSetPoint;
 
     [SerializeField] bool interactActive;
 
-    float lastFireTime = 0f;
 
+    float lastFireTime = 0f;
     public WeaponType Type { get { return type; } }
 
     void Awake()
     {
         for (int i = 0; i < defaultBulletsCount; i++)
         {
-            bulletPool.Add(Instantiate(bullet, transform));
+            CreateNewBullet();
         }
+    }
+
+    Bullet CreateNewBullet()
+    {
+        GameObject newBullet = Instantiate(bullet, transform);
+        Bullet bulletScript = newBullet.GetComponent<Bullet>();
+
+        bulletScript.SetDamage(damage);
+
+        bulletPool.Add(newBullet);
+
+        return bulletScript;
+    }
+
+    Bullet FindUnusedBullet()
+    {
+        Bullet fireBullet;
+
+        for (int i = 0; i < bulletPool.Count; i++)
+        {
+            fireBullet = bulletPool[i].GetComponent<Bullet>();
+
+            if (!fireBullet.IsEnable)
+                return fireBullet;
+        }
+
+        fireBullet = CreateNewBullet().GetComponent<Bullet>();
+
+        return fireBullet;
     }
 
     void ShootRay()
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(spawnPoint.position, spawnPoint.forward, out hit, maxDistance))
+        if (Physics.Raycast(bulletSpawnPoint.position + offSetPoint, bulletSpawnPoint.forward, out hit, maxDistance))
         {
             HealthSystem objetive = hit.transform.GetComponent<HealthSystem>();
 
@@ -80,6 +119,14 @@ public class Weapon : MonoBehaviour, IInteractable
 
     void ShootBullet()
     {
+        Bullet firingBullet = FindUnusedBullet();
+
+        firingBullet.gameObject.transform.SetPositionAndRotation(bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+
+        firingBullet.EnableBullet();
+
+        firingBullet.Fire();
+
         ammo--;
     }
 
@@ -93,10 +140,12 @@ public class Weapon : MonoBehaviour, IInteractable
             {
                 case WeaponFireType.Ray:
                     ShootRay();
+                    Fired?.Invoke();
                     break;
 
                 case WeaponFireType.Spawn:
                     ShootBullet();
+                    Fired?.Invoke();
                     break;
 
                 default:
@@ -107,21 +156,19 @@ public class Weapon : MonoBehaviour, IInteractable
         lastFireTime = Time.time;
     }
 
-    public void Reload(int ammo)
+    public int Reload(int otherAmmo)
     {
+        if (otherAmmo <= 0)
+            return 0;
+
+        Reloaded?.Invoke();
+
         int aux = maxAmmo - ammo;
 
-        if (ammo > aux)
-        {
-            ammo -= aux;
-            this.ammo += aux;
-        }
-        else
-        {
-            this.ammo += ammo;
-            ammo -= ammo;
-        }
+        ammo += (aux <= otherAmmo) ? aux : otherAmmo;
+        otherAmmo -= (aux <= otherAmmo) ? aux : otherAmmo;
 
+        return otherAmmo;
     }
 
     public void OnDrop()
@@ -129,6 +176,9 @@ public class Weapon : MonoBehaviour, IInteractable
         interactActive = true;
         rb.useGravity = true;
         rb.isKinematic = false;
+
+        bulletSpawnPoint = defaultPoint;
+
         gameObject.GetComponent<Collider>().enabled = true;
     }
 
@@ -151,8 +201,14 @@ public class Weapon : MonoBehaviour, IInteractable
         return interactActive;
     }
 
+    public void SetSpawnPoint(Transform newPos) => bulletSpawnPoint = newPos;
+
+#if DEBUG
+
     private void OnDrawGizmos()
     {
-        Debug.DrawRay(spawnPoint.position, spawnPoint.forward * maxDistance, Color.yellow);
+        Debug.DrawRay(bulletSpawnPoint.position + offSetPoint, bulletSpawnPoint.forward * maxDistance, Color.yellow);
     }
+
+#endif
 }
