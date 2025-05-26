@@ -39,13 +39,21 @@ public class InteractController : MonoBehaviour
             {
                 lastInteract = obj;
                 rayColor = Color.green;
+
+                if (CrossController.Instance)
+                    CrossController.Instance.ActiveInteractCross(true);
             }
             else
             {
                 rayColor = Color.red;
                 lastInteract = null;
+
+                if (CrossController.Instance)
+                    CrossController.Instance.ActiveInteractCross(false);
             }
         }
+        else if (CrossController.Instance)
+            CrossController.Instance.ActiveInteractCross(false);
     }
 
     void InteractAction(InputAction.CallbackContext context)

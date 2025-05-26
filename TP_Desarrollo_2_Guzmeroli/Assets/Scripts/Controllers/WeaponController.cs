@@ -29,6 +29,9 @@ public class WeaponController : MonoBehaviour
 
     void SelectWeapon(WeaponType weapon)
     {
+        if (CrossController.Instance)
+            CrossController.Instance.ActiveWeaponCross(true);
+
         switch (activeWeapon)
         {
             case WeaponType.Primary:
@@ -81,13 +84,16 @@ public class WeaponController : MonoBehaviour
             default:
 
                 activeWeapon = WeaponType.None;
+
+                if (CrossController.Instance)
+                    CrossController.Instance.ActiveDefaultCross(true);
                 break;
         }
     }
 
     public void ChangeWeapon(int index)
     {
-        if (index <= (int)WeaponType.Melee && index > (int)WeaponType.None)
+        if (index <= (int)WeaponType.Melee && index >= (int)WeaponType.None)
         {
             WeaponType selectedWeapon = (WeaponType)index;
 
@@ -123,7 +129,7 @@ public class WeaponController : MonoBehaviour
                     if ((int)activeWeapon == index)
                         index++;
 
-                    index = LoopIndex(index, (int)WeaponType.Primary, (int)WeaponType.Melee);
+                    index = LoopIndex(index, (int)WeaponType.None, (int)WeaponType.Melee);
                     selectedWeapon = (WeaponType)index;
                     break;
                 }
@@ -187,7 +193,7 @@ public class WeaponController : MonoBehaviour
     {
         int newIndex = (int)activeWeapon - 1;
 
-        newIndex = LoopIndex(newIndex, (int)WeaponType.Primary, (int)WeaponType.Melee);
+        newIndex = LoopIndex(newIndex, (int)WeaponType.None, (int)WeaponType.Melee);
 
         ChangeWeapon(newIndex);
     }
@@ -197,7 +203,7 @@ public class WeaponController : MonoBehaviour
     {
         int newIndex = (int)activeWeapon + 1;
 
-        newIndex = LoopIndex(newIndex, (int)WeaponType.Primary, (int)WeaponType.Melee);
+        newIndex = LoopIndex(newIndex, (int)WeaponType.None, (int)WeaponType.Melee);
 
         ChangeWeapon(newIndex);
     }
