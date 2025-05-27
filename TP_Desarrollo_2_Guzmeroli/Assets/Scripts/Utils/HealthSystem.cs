@@ -8,6 +8,9 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] float health;
     [SerializeField] float maxHealth;
 
+    public float Health {  get { return health; } }
+    public float MaxHealth { get { return maxHealth; } }
+
     public void TakeDamage(float damage)
     {
         if (damage < 0) damage *= -1;

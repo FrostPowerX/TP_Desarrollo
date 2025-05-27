@@ -46,20 +46,29 @@ public class PlayerController : Character
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void OnDestroy()
+    {
+        inputActions.Disable();
 
+        jump.started -= Jump;
+
+        move.started -= Move;
+        move.canceled -= CancelMove;
+
+        look.performed -= Look;
+
+        fire.started -= FireWeapon;
+        drop.started -= DropWeapon;
+        reload.started -= ReloadWeapon;
+
+        scroll.performed -= ScrollWeapon;
+
+        Cursor.lockState = CursorLockMode.None;
+    }
 
     private void Update()
     {
         ActualizeDirectionMovement();
-    }
-
-    [ContextMenu("LockMouse")]
-    void LockMouse()
-    {
-        if (Cursor.lockState != CursorLockMode.Locked)
-            Cursor.lockState = CursorLockMode.Locked;
-        else
-            Cursor.lockState = CursorLockMode.None;
     }
 
     void Jump(InputAction.CallbackContext cont)

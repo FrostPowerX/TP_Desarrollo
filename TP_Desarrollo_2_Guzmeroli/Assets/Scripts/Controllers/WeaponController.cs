@@ -15,6 +15,29 @@ public class WeaponController : MonoBehaviour
     [SerializeField] int ammoSecondary;
     [SerializeField] float offSetDrop;
 
+    public int AmmoPri { get { return ammoPrimary; } }
+    public int AmmoSec { get { return ammoSecondary; } }
+    public Weapon ActiveWeapon
+    {
+        get
+        {
+            switch (activeWeapon)
+            {
+                case WeaponType.Primary:
+                    return primary;
+
+                case WeaponType.Secondary:
+                    return secondary;
+
+                case WeaponType.Melee:
+                    return melee;
+            }
+
+            return null;
+        }
+    }
+
+
     int LoopIndex(int index, int min, int max)
     {
         int result = index;

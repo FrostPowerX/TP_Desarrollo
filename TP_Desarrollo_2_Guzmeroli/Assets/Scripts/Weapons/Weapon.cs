@@ -62,6 +62,8 @@ public class Weapon : MonoBehaviour, IInteractable
 
     float lastFireTime = 0f;
     public WeaponType Type { get { return type; } }
+    public int Ammo { get { return ammo; } }
+    public int MaxAmmo { get { return maxAmmo; } }
 
     void Awake()
     {

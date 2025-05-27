@@ -155,7 +155,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.2
+  near clip plane: 0.1
   far clip plane: 50
   field of view: 70
   orthographic: 0
@@ -199,7 +199,8 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 5577385451881500080}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -665,7 +666,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.2
+  near clip plane: 0.1
   far clip plane: 50
   field of view: 70
   orthographic: 0

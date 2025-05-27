@@ -8,6 +8,8 @@ public class Reception : MonoBehaviour
     public delegate void AllDone();
     public event AllDone OnAllDone;
 
+    [SerializeField] GameObject victoryMenu;
+
     [SerializeField] RecieveOrder reciever;
     [SerializeField] List<Order> ordersSlots;
     [SerializeField] List<ItemSO> itemsOrderList;
@@ -26,7 +28,13 @@ public class Reception : MonoBehaviour
     void Start()
     {
         reciever.OnEntryFood += Checkin;
+        OnAllDone += OpenVictoryMenu;
         cooldown = timePerOrder;
+    }
+
+    private void OnDestroy()
+    {
+        reciever.OnEntryFood -= Checkin;
     }
 
     void Update()
@@ -41,6 +49,13 @@ public class Reception : MonoBehaviour
             OnAllDone?.Invoke();
             this.enabled = false;
         }
+    }
+
+    void OpenVictoryMenu()
+    {
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        victoryMenu.SetActive(true);
     }
 
     void Checkin(Inventory inventory)

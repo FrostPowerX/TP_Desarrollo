@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : Singleton<SceneController>
 {
-    [SerializeField] List<SceneAsset> sceneList;
+    public delegate void LoadingDoneName(string scene);
+    public event LoadingDoneName OnLoadingDoneName;
+
+    public delegate void LoadingDoneIndex(int scene);
+    public event LoadingDoneIndex OnLoadingDoneIndex;
 
     protected override void Initialize()
     {
@@ -55,6 +59,8 @@ public class SceneController : Singleton<SceneController>
 
             yield return null;
         }
+
+        OnLoadingDoneIndex?.Invoke(sceneIndex);
     }
 
     IEnumerator LoadAsynchronously(string sceneName, LoadSceneMode mode)
@@ -67,6 +73,8 @@ public class SceneController : Singleton<SceneController>
 
             yield return null;
         }
+
+        OnLoadingDoneName?.Invoke(sceneName);
     }
 
     IEnumerator UnloadAsync(int index)

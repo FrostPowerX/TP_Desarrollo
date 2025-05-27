@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
-    private static Singleton<T> instance = null;
+    private static Singleton<T> instance;
 
     public static T Instance { get { return (T)instance; } }
 
@@ -17,6 +17,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         {
             Debug.Log($"Destroyed {this.name}. Already Exist a instance.");
             Destroy(this);
+            return;
         }
 
         instance = this;
