@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] SceneAsset actualScene;
-
     public void Exit()
     {
         Application.Quit();
@@ -22,6 +20,6 @@ public class UIManager : MonoBehaviour
 
     public void UnloadActualScene()
     {
-        SceneController.Instance.UnloadScene(actualScene.name);
+
     }
 }
