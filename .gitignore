@@ -1,4 +1,18 @@
-*.vs
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+!/[Aa]ssets/**/*.meta
+
+[Aa]ssets/Plugins/Editor/JetBrains*
+
+.vs/
+
+.gradle/
 
 ExportedObj/
 .consulo/
@@ -16,17 +30,14 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+
+sysinfo.txt
+
 *.apk
 *.unitypackage
-crashlytics-build.properties
 
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Ll]ogs/
-[Mm]emoryCaptures/
+crashlytics-build.properties
