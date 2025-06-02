@@ -371,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 652330078}
     - target: {fileID: 5603725911130423530, guid: 46749786c32674c43a5d58786be89cce, type: 3}
       propertyPath: m_VersionIndex
-      value: 6288
+      value: 6291
       objectReference: {fileID: 0}
     - target: {fileID: 5603725911130423530, guid: 46749786c32674c43a5d58786be89cce, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -15619,7 +15619,7 @@ PrefabInstance:
       objectReference: {fileID: 510934888}
     - target: {fileID: 8057361041556363970, guid: f3de9cfb7dc701a428a5f2217017bb7e, type: 3}
       propertyPath: m_VersionIndex
-      value: 3380
+      value: 3386
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16317,6 +16317,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1143941933847060803, guid: 2b555bf7f0829d042a067c19ae28e056, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: a6515635db59adc4485f747f8a5b01b3, type: 2}
     - target: {fileID: 8085526697854113447, guid: 2b555bf7f0829d042a067c19ae28e056, type: 3}
       propertyPath: m_Name
       value: Corral

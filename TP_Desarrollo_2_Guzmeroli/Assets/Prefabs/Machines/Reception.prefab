@@ -94,7 +94,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714534455156005901}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 04b6506c799075549823f6b71bf3f98d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfdc042c5ce59241845d8eaae862068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  victoryMenu: {fileID: 0}
   reciever: {fileID: 5700266081099291477}
   ordersSlots:
   - {fileID: 8106889467266291836}
@@ -2364,7 +2365,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4136255247478788735}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 04b6506c799075549823f6b71bf3f98d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
