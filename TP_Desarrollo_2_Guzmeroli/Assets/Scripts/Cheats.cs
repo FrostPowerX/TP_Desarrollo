@@ -42,7 +42,7 @@ public class Cheats : MonoBehaviour
 
     private void Start()
     {
-        position = GameManager.Instance.GetPlayerTransform();
+        position = GameManager.Instance.GetPlayer().transform;
     }
     private void ChangeSpeed(InputAction.CallbackContext context)
     {
@@ -56,13 +56,13 @@ public class Cheats : MonoBehaviour
     {
         if (!position)
         {
-            position = GameManager.Instance.GetPlayerTransform();
+            position = GameManager.Instance.GetPlayer().transform;
             return;
         }
 
         for (int i = 0; i < foods.Count; i++)
         {
-            GameObject newfood = Instantiate(foods[i], position.position + position.forward * 0.3f, position.rotation);
+            GameObject newfood = Instantiate(foods[i], position.position + position.forward * 2f, position.rotation);
             newfood.GetComponent<Item>().AddCount(500);
         }
     }

@@ -27,14 +27,14 @@ public class Reception : MonoBehaviour
 
     void Start()
     {
-        reciever.OnEntryFood += Checkin;
+        reciever.OnEntryFood += CheckIn;
         OnAllDone += OpenVictoryMenu;
         cooldown = timePerOrder;
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
-        reciever.OnEntryFood -= Checkin;
+        reciever.OnEntryFood -= CheckIn;
     }
 
     void Update()
@@ -58,7 +58,7 @@ public class Reception : MonoBehaviour
         victoryMenu.SetActive(true);
     }
 
-    void Checkin(Inventory inventory)
+    void CheckIn(Inventory inventory)
     {
         for (int i = 0; i < ordersSlots.Count; i++)
             if (ordersSlots[i].IsEnable)
@@ -96,4 +96,9 @@ public class Reception : MonoBehaviour
 
         return itemsOrderList[rand];
     }
+
+    public void SetOrderTime(float time) => timePerOrder = time;
+    public void SetMinQuantity(int quantity) => minQuantity = quantity;
+    public void SetMaxQuantity(int quantity) => maxQuantity = quantity;
+    public void SetMaxOrders(int value) => remainingOrders = value;
 }

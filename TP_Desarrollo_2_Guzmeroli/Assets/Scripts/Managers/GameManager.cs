@@ -4,50 +4,53 @@ using System.Collections.Generic;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] GameObject playerPref;
-    [SerializeField] GameObject UI;
+    [SerializeField] GameObject UIpref;
 
     [SerializeField] List<LevelSettingsSO> levelSettingsSOs;
-    [SerializeField] List<int> creatingOnScenesIds;
 
     [SerializeField] GameObject player;
+    [SerializeField] GameObject UI;
 
     [SerializeField] int usedSettings;
 
     [SerializeField] int activeSceneId;
 
-    public int ActiveScene {  get { return activeSceneId; } }
+    public int ActiveScene { get { return activeSceneId; } }
 
-    private void Start()
-    {
-        SceneController.Instance.OnLoadingDoneIndex += CheckSceneLoading;
-    }
-
-    private void CheckSceneLoading(int scene)
-    {
-        Time.timeScale = 1.0f;
-
-        activeSceneId = scene;
-
-        for (int i = 0; creatingOnScenesIds.Count > i; i++)
-        {
-            if(creatingOnScenesIds[i] == scene)
-                CreatePlayer();
-        }
-    }
 
     void CreatePlayer()
     {
-        player = Instantiate(playerPref, levelSettingsSOs[usedSettings].playerPos, Quaternion.Euler(Vector3.zero));
-        GameObject ui = Instantiate(UI);
-
-        ui.GetComponent<UIController>().SetTarget(player);
+        player = Instantiate(playerPref, Vector3.zero, Quaternion.Euler(Vector3.zero));
     }
 
-    public Transform GetPlayerTransform()
+    void CreatePlayerUI()
+    {
+        UI = Instantiate(UI);
+        UI.GetComponent<UIController>().SetTarget(player);
+    }
+
+    public LevelSettingsSO StartLevel()
+    {
+        Time.timeScale = 1.0f;
+
+        CreatePlayer();
+        CreatePlayerUI();
+
+        return levelSettingsSOs[usedSettings];
+    }
+
+    public GameObject GetPlayer()
     {
         if (player)
-            return player.transform;
+            return player;
         else
             return null;
+    }
+
+    public GameObject GetUI()
+    {
+        if(UI)
+            return UI;
+        else return null;
     }
 }
