@@ -8,14 +8,14 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 
     protected virtual void Initialize()
     {
-        Debug.Log($"Initialize Base of {this.name}.");
+        Debug.Log($"Initialize Base of {this.ToString()}.");
     }
 
     private void Awake()
     {
         if (instance != null)
         {
-            Debug.Log($"Destroyed {this.name}. Already Exist a instance.");
+            Debug.Log($"Destroyed {this.ToString()}. Already Exist a instance.");
             Destroy(this);
             return;
         }

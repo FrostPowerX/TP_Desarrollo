@@ -8,8 +8,6 @@ public class Cheats : MonoBehaviour
 {
     [SerializeField] InputActionAsset inputActions;
 
-    [SerializeField] Transform position;
-
     [SerializeField] List<GameObject> foods;
 
     [SerializeField] float speedValue;
@@ -40,10 +38,6 @@ public class Cheats : MonoBehaviour
         speed.performed -= ChangeSpeed;
     }
 
-    private void Start()
-    {
-        position = GameManager.Instance.GetPlayer().transform;
-    }
     private void ChangeSpeed(InputAction.CallbackContext context)
     {
         speedValue = speed.ReadValue<float>();
@@ -54,6 +48,8 @@ public class Cheats : MonoBehaviour
 
     private void SpawnFood(InputAction.CallbackContext context)
     {
+        Transform position = GameManager.Instance.GetPlayer().transform;
+
         if (!position)
         {
             position = GameManager.Instance.GetPlayer().transform;

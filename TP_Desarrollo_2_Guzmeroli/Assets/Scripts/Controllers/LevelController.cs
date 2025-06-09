@@ -4,7 +4,6 @@ public class LevelController : Singleton<LevelController>
 {
     [SerializeField] Transform spawnPosition;
     [SerializeField] Reception recept;
-    [SerializeField] LevelSettingsSO settings;
 
     [SerializeField] short level;
     [SerializeField] float difficulty;
@@ -31,18 +30,24 @@ public class LevelController : Singleton<LevelController>
 
     void SetConfiguration()
     {
-        settings = GameManager.Instance.StartLevel();
+        LevelSettingsSO settings = GameManager.Instance.StartLevel();
 
-        recept.SetMaxOrders(settings.totalOrders);
-        recept.SetOrderTime(settings.timePerOrder);
-        recept.SetMinQuantity(settings.minCountOrder);
-        recept.SetMaxQuantity(settings.maxCountOrder);
+        if (recept)
+        {
+            recept.SetMaxOrders(settings.totalOrders);
+            recept.SetOrderTime(settings.timePerOrder);
+            recept.SetMinQuantity(settings.minCountOrder);
+            recept.SetMaxQuantity(settings.maxCountOrder);
+        }
 
+        if (settings)
+            remainingTime = settings.timeLimit;
 
         GameObject player = GameManager.Instance.GetPlayer();
 
         player.transform.position = spawnPosition.position;
         player.transform.rotation = spawnPosition.rotation;
+
     }
 
     void Lose()

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -25,7 +26,7 @@ public class GameManager : Singleton<GameManager>
 
     void CreatePlayerUI()
     {
-        UI = Instantiate(UI);
+        UI = Instantiate(UIpref);
         UI.GetComponent<UIController>().SetTarget(player);
     }
 
@@ -35,6 +36,8 @@ public class GameManager : Singleton<GameManager>
 
         CreatePlayer();
         CreatePlayerUI();
+
+        activeSceneId = SceneManager.GetActiveScene().buildIndex;
 
         return levelSettingsSOs[usedSettings];
     }
