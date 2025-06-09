@@ -28,6 +28,7 @@ public class Order : MonoBehaviour
     [ContextMenu("Generate Sprite")]
     void GenerateSprite(GameObject prefab)
     {
+#if DEBUG
         Texture2D texture = AssetPreview.GetAssetPreview(prefab);
 
         if (texture)
@@ -35,6 +36,7 @@ public class Order : MonoBehaviour
             icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
             iconShow.sprite = icon;
         }
+#endif
     }
 
 

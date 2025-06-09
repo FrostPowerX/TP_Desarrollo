@@ -44,8 +44,10 @@ public class Item : MonoBehaviour, IInteractable
     [ContextMenu("Generate Sprite")]
     void GenerateSprite()
     {
+#if DEBUG
         Texture2D texture = AssetPreview.GetAssetPreview(prefab);
         preview = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
+#endif
     }
 
 

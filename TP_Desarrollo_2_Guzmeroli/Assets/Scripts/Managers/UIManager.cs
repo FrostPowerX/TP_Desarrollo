@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+<<<<<<< Updated upstream
+=======
+    [SerializeField] int actualScene;
+
+>>>>>>> Stashed changes
     public void Exit()
     {
         Application.Quit();
@@ -20,6 +25,10 @@ public class UIManager : MonoBehaviour
 
     public void UnloadActualScene()
     {
+<<<<<<< Updated upstream
 
+=======
+        SceneController.Instance.UnloadScene(actualScene);
+>>>>>>> Stashed changes
     }
 }
