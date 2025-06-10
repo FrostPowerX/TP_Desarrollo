@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a4f940cb844bd489817f7b989026ed, type: 3}
   m_Name: SteakCoocked
   m_EditorClassIdentifier: 
-  itemName: CoockedSteak
+  itemName: SteakCooked
   description: Wath is this??
   id: 7
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: cb6cc0dec036a784984f2d024cfd810e, type: 3}
   prefab: {fileID: 5695144588828059731, guid: 99b91431aefc9e946ae7a518bbeec6d4, type: 3}

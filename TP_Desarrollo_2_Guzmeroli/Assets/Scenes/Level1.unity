@@ -15353,6 +15353,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2964024113407618124, guid: 9a0ea94a38514444eb53dd39e09eb846, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6358841856874030479, guid: 9a0ea94a38514444eb53dd39e09eb846, type: 3}
       propertyPath: m_Name
       value: PauseMenu

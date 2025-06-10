@@ -16,6 +16,6 @@ MonoBehaviour:
   minCountOrder: 1
   maxCountOrder: 2
   timePerOrder: 10
-  totalOrders: 15
-  timeLimit: 450
+  totalOrders: 10
+  timeLimit: 150
   playerPos: {x: 2, y: 0.2, z: -1}

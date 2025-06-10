@@ -48,13 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reference: {fileID: 11400000, guid: a982b793ea141bd4f87fb786ed6a6c42, type: 2}
   id: 0
-  itemName: 
+  itemName: Tomatoe
   description: 
   count: 0
   interacteable: 1
   inInventory: 0
-  preview: {fileID: 0}
-  prefab: {fileID: 5695144588828059731}
+  icon: {fileID: 0}
 --- !u!54 &-3184849168638665619
 Rigidbody:
   m_ObjectHideFlags: 0

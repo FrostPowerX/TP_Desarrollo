@@ -1,6 +1,4 @@
-using UnityEditor;
 using UnityEngine;
-using static Stove;
 
 public class Stove : MonoBehaviour, IInteractable
 {
@@ -58,18 +56,11 @@ public class Stove : MonoBehaviour, IInteractable
             OnCoocking();
     }
 
-    [ContextMenu("Generate Sprite")]
     void GenerateSprite()
     {
-#if DEBUG
-        Texture2D texture = AssetPreview.GetAssetPreview(coockedItem);
+        iconResult = coockedItem.GetComponent<Item>().Icon;
 
-        if (texture)
-        {
-            iconResult = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
-            OnIconGenerated?.Invoke();
-        }
-#endif
+        OnIconGenerated?.Invoke();
     }
 
     void StartCoocking()

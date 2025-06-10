@@ -48,13 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reference: {fileID: 11400000, guid: 9c214921830290d4bb22bad497d1344c, type: 2}
   id: 0
-  itemName: 
+  itemName: Pea
   description: 
   count: 0
   interacteable: 1
   inInventory: 0
-  preview: {fileID: 0}
-  prefab: {fileID: 5695144588828059731}
+  icon: {fileID: 0}
 --- !u!54 &4407801261749184646
 Rigidbody:
   m_ObjectHideFlags: 0

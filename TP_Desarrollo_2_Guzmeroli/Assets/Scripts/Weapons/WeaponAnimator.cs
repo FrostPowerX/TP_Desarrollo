@@ -12,12 +12,14 @@ public class WeaponAnimator : MonoBehaviour
     {
         weapon.Fired += PlayAnimFire;
         weapon.Reloaded += PlayAnimReload;
+        animator.keepAnimatorStateOnDisable = true;
     }
 
     void PlayAnimFire()
     {
         animator.SetTrigger("Fire");
-        if (particles)
+
+        if (particles && weapon.Type != WeaponType.Melee)
             particles.Play();
     }
 

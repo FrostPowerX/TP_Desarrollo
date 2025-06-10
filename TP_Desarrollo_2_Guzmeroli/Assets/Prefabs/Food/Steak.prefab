@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -578960176160304356}
   - component: {fileID: 5223786373830245455}
   m_Layer: 0
-  m_Name: Steack
+  m_Name: Steak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,13 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reference: {fileID: 11400000, guid: 02c75460989d43546af23187dca657e0, type: 2}
   id: 0
-  itemName: 
+  itemName: Steak
   description: 
   count: 0
   interacteable: 1
   inInventory: 0
-  preview: {fileID: 0}
-  prefab: {fileID: 5695144588828059731}
+  icon: {fileID: 0}
 --- !u!54 &5223786373830245455
 Rigidbody:
   m_ObjectHideFlags: 0

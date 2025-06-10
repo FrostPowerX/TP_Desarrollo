@@ -15,5 +15,5 @@ MonoBehaviour:
   itemName: Carrot
   description: This is a carrot...
   id: 1
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ebb49dbfb2abd2e41953cc53394403c3, type: 3}
   prefab: {fileID: 5695144588828059731, guid: e57602fe30199fe43a69b4a33b7f8e66, type: 3}

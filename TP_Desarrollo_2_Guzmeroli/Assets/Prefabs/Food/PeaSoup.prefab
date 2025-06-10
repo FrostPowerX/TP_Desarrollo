@@ -48,13 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reference: {fileID: 11400000, guid: e4ae521d65af58d4eb41583fc7d4314b, type: 2}
   id: 0
-  itemName: 
+  itemName: PeaSoup
   description: 
   count: 0
   interacteable: 1
   inInventory: 0
-  preview: {fileID: 0}
-  prefab: {fileID: 5695144588828059731}
+  icon: {fileID: 0}
 --- !u!54 &-6695817171016080115
 Rigidbody:
   m_ObjectHideFlags: 0

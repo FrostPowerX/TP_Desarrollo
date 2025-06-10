@@ -48,13 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reference: {fileID: 11400000, guid: 1ed108b12731807438642a2d74f69487, type: 2}
   id: 0
-  itemName: 
+  itemName: CarrotSoup
   description: 
   count: 0
   interacteable: 1
   inInventory: 0
-  preview: {fileID: 0}
-  prefab: {fileID: 5695144588828059731}
+  icon: {fileID: 0}
 --- !u!54 &-8874320950762477519
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -24,22 +24,6 @@ public class Order : MonoBehaviour
         quantityText.text = quantity.ToString();
     }
 
-
-    [ContextMenu("Generate Sprite")]
-    void GenerateSprite(GameObject prefab)
-    {
-#if DEBUG
-        Texture2D texture = AssetPreview.GetAssetPreview(prefab);
-
-        if (texture)
-        {
-            icon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
-            iconShow.sprite = icon;
-        }
-#endif
-    }
-
-
     public void SetOrder(ItemSO itemOrder, int quantity)
     {
         id = itemOrder.id;
@@ -47,7 +31,8 @@ public class Order : MonoBehaviour
 
         orderNameText.text = itemOrder.itemName;
 
-        GenerateSprite(itemOrder.prefab);
+        icon = itemOrder.icon;
+        iconShow.sprite = icon;
 
         Enable();
     }

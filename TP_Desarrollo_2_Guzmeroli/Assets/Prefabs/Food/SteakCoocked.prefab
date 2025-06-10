@@ -48,13 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reference: {fileID: 11400000, guid: fbc99fd998a778f46a611b96746ab720, type: 2}
   id: 0
-  itemName: 
+  itemName: SteakCooked
   description: 
   count: 0
   interacteable: 1
   inInventory: 0
-  preview: {fileID: 0}
-  prefab: {fileID: 5695144588828059731}
+  icon: {fileID: 0}
 --- !u!54 &7692216625834942065
 Rigidbody:
   m_ObjectHideFlags: 0

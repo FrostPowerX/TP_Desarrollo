@@ -48,13 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reference: {fileID: 11400000, guid: 16df13b5e2980f6459f1471fafeb8666, type: 2}
   id: 0
-  itemName: 
+  itemName: Carrot
   description: 
   count: 0
   interacteable: 1
   inInventory: 0
-  preview: {fileID: 0}
-  prefab: {fileID: 5695144588828059731}
+  icon: {fileID: 0}
 --- !u!54 &4824661246242601555
 Rigidbody:
   m_ObjectHideFlags: 0

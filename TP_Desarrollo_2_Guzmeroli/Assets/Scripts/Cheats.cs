@@ -58,7 +58,7 @@ public class Cheats : MonoBehaviour
 
         for (int i = 0; i < foods.Count; i++)
         {
-            GameObject newfood = Instantiate(foods[i], position.position + position.forward * 2f, position.rotation);
+            GameObject newfood = Instantiate(foods[i], position.position + position.forward * 2f + position.up * 1.2f, position.rotation);
             newfood.GetComponent<Item>().AddCount(500);
         }
     }

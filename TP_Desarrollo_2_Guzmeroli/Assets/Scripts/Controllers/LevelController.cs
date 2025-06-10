@@ -16,13 +16,25 @@ public class LevelController : Singleton<LevelController>
 
     void Start()
     {
+        if (recept)
+            recept.OnAllDone += Victory;
+
         SetConfiguration();
+    }
+
+    private void OnDestroy()
+    {
+        if (recept)
+            recept.OnAllDone -= Victory;
     }
 
     private void Update()
     {
         if (!infiniteTime)
+        {
             remainingTime -= (remainingTime > 0) ? Time.deltaTime : remainingTime;
+            GameManager.Instance.GetUI().GetComponent<UIController>().UpdateTime(remainingTime);
+        }
 
         if (remainingTime <= 0)
             Lose();
@@ -47,11 +59,25 @@ public class LevelController : Singleton<LevelController>
 
         player.transform.position = spawnPosition.position;
         player.transform.rotation = spawnPosition.rotation;
-
     }
 
     void Lose()
     {
+        if (!losePanel)
+            return;
 
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        losePanel.SetActive(true);
+    }
+
+    void Victory()
+    {
+        if (!victoryPanel)
+            return;
+
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        victoryPanel.SetActive(true);
     }
 }

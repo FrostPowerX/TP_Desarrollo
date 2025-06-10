@@ -4943,7 +4943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 25
-  fireRate: 0.3
+  fireRate: 1
   reloadTime: 0
   maxDistance: 1
   type: 3
@@ -5015,9 +5015,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5112033274213634103}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7af77a643a734744191cfaec7eeb2601, type: 2}
+  m_Controller: {fileID: 9100000, guid: 775d9c7860e68154795c82901a86ef5f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5036,7 +5036,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5112033274213634103}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 192b2001bedf7f742b383f604d3e8613, type: 3}
   m_Name: 
@@ -5062,7 +5062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 90e45e4d342ab144390f8c0265e96ae6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0933
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 90e45e4d342ab144390f8c0265e96ae6, type: 3}
       propertyPath: m_LocalRotation.w

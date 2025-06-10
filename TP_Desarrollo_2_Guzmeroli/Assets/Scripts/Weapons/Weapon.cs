@@ -116,7 +116,8 @@ public class Weapon : MonoBehaviour, IInteractable
             }
         }
 
-        ammo--;
+        if (type != WeaponType.Melee)
+            ammo--;
     }
 
     void ShootBullet()
@@ -129,7 +130,8 @@ public class Weapon : MonoBehaviour, IInteractable
 
         firingBullet.Fire();
 
-        ammo--;
+        if (type != WeaponType.Melee)
+            ammo--;
     }
 
     public void Fire()
@@ -137,7 +139,7 @@ public class Weapon : MonoBehaviour, IInteractable
         if (Time.time < lastFireTime + fireRate)
             return;
 
-        if (ammo > 0)
+        if (ammo > 0 || ammoType == AmmoType.None)
             switch (fireType)
             {
                 case WeaponFireType.Ray:
@@ -151,7 +153,7 @@ public class Weapon : MonoBehaviour, IInteractable
                     break;
 
                 default:
-                    Debug.LogWarning($"{this.name} no tiene un WeaponType asignado.");
+                    Debug.LogWarning($"{this.ToString()} : {this.name} no tiene un WeaponType asignado.");
                     break;
             }
 

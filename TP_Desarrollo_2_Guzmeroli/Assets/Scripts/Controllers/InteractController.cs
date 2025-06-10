@@ -22,6 +22,11 @@ public class InteractController : MonoBehaviour
         interact.started += InteractAction;
     }
 
+    private void OnDestroy()
+    {
+        interact.started -= InteractAction;
+    }
+
     private void FixedUpdate()
     {
         InteractRay();

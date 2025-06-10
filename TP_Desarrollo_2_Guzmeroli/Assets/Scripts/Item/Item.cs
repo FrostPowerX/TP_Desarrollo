@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,22 +17,28 @@ public class Item : MonoBehaviour, IInteractable
     [SerializeField] protected bool interacteable;
     [SerializeField] protected bool inInventory;
 
-    [SerializeField] Sprite preview;
-    [SerializeField] GameObject prefab;
+    [SerializeField] Sprite icon;
 
     public string ItemName { get { return itemName; } }
     public int ID { get { return id; } }
     public int Count { get { return count; } }
 
     public bool InInventory { get { return inInventory; } set { inInventory = value; } }
-    public Sprite Icon { get { return preview; } }
-    public GameObject Prefab { get { return prefab; } }
+    public Sprite Icon
+    {
+        get
+        {
+            if (icon)
+                return icon;
+            else return reference.icon;
+        }
+    }
+    public GameObject Prefab { get { return reference.prefab; } }
 
 
     private void Start()
     {
         LoadReference();
-        GenerateSprite();
     }
 
     void LoadReference()
@@ -39,17 +46,29 @@ public class Item : MonoBehaviour, IInteractable
         id = reference.id;
         itemName = reference.itemName;
         description = reference.description;
+        icon = reference.icon;
     }
 
-    [ContextMenu("Generate Sprite")]
-    void GenerateSprite()
-    {
 #if DEBUG
-        Texture2D texture = AssetPreview.GetAssetPreview(prefab);
-        preview = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
-#endif
-    }
+    [ContextMenu("Save Image PNG")]
+    void CreatePNG()
+    {
+        Texture2D texture = AssetPreview.GetAssetPreview(reference.prefab);
 
+        if (!texture)
+        {
+            Debug.LogWarning($"Missing Texture. {this.ToString()} : Item Name {itemName}");
+            return;
+        }
+
+        byte[] bytes = texture.EncodeToPNG();
+
+        string path = Path.Combine(Application.persistentDataPath, $"Textures/{itemName}.png");
+        File.WriteAllBytes(path, bytes);
+
+        Debug.Log("Texture save on: " + path);
+    }
+#endif
 
     public void AddCount(int count)
     {

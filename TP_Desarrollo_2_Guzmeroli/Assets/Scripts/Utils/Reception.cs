@@ -28,7 +28,6 @@ public class Reception : MonoBehaviour
     void Start()
     {
         reciever.OnEntryFood += CheckIn;
-        OnAllDone += OpenVictoryMenu;
         cooldown = timePerOrder;
     }
 
@@ -49,13 +48,6 @@ public class Reception : MonoBehaviour
             OnAllDone?.Invoke();
             this.enabled = false;
         }
-    }
-
-    void OpenVictoryMenu()
-    {
-        Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None;
-        victoryMenu.SetActive(true);
     }
 
     void CheckIn(Inventory inventory)

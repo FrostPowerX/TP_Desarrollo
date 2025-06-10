@@ -21,19 +21,25 @@ public class WeaponController : MonoBehaviour
     {
         get
         {
+            return GetWeaponByType(activeWeapon);
+        }
+
+        private set
+        {
             switch (activeWeapon)
             {
                 case WeaponType.Primary:
-                    return primary;
+                    primary = value;
+                    break;
 
                 case WeaponType.Secondary:
-                    return secondary;
+                    secondary = value;
+                    break;
 
                 case WeaponType.Melee:
-                    return melee;
+                    melee = value;
+                    break;
             }
-
-            return null;
         }
     }
 
@@ -50,127 +56,99 @@ public class WeaponController : MonoBehaviour
         return result;
     }
 
+    Weapon GetWeaponByType(WeaponType type)
+    {
+        switch (type)
+        {
+            case WeaponType.Primary:
+                return primary;
+
+            case WeaponType.Secondary:
+                return secondary;
+
+            case WeaponType.Melee:
+                return melee;
+
+            default:
+                return null;
+        }
+    }
+
     void SelectWeapon(WeaponType weapon)
     {
         if (CrossController.Instance)
             CrossController.Instance.ActiveWeaponCross(true);
 
-        switch (activeWeapon)
-        {
-            case WeaponType.Primary:
-                if (!primary)
-                    break;
+        Weapon current = GetWeaponByType(activeWeapon);
 
-                primary.gameObject.SetActive(false);
-                break;
-
-            case WeaponType.Secondary:
-                if (!secondary)
-                    break;
-
-                secondary.gameObject.SetActive(false);
-                break;
-
-            case WeaponType.Melee:
-                if (!melee)
-                    break;
-
-                melee.gameObject.SetActive(false);
-                break;
-        }
+        if(current)
+            current.gameObject.SetActive(false);
 
         activeWeapon = weapon;
 
-        switch (weapon)
+        Weapon next = GetWeaponByType(weapon);
+
+        if (next)
+            next.gameObject.SetActive(true);
+        else
         {
-            case WeaponType.Primary:
-                if (!primary)
-                    break;
+            activeWeapon = WeaponType.None;
 
-                primary.gameObject.SetActive(true);
-                break;
-
-            case WeaponType.Secondary:
-                if (!secondary)
-                    break;
-
-                secondary.gameObject.SetActive(true);
-                break;
-
-            case WeaponType.Melee:
-                if (!melee)
-                    break;
-
-                melee.gameObject.SetActive(true);
-                break;
-
-            default:
-
-                activeWeapon = WeaponType.None;
-
-                if (CrossController.Instance)
-                    CrossController.Instance.ActiveDefaultCross(true);
-                break;
+            if (CrossController.Instance)
+                CrossController.Instance.ActiveDefaultCross(true);
         }
     }
 
-    public void ChangeWeapon(int index)
+    bool IsValidWeapon(WeaponType weapon)
     {
-        if (index <= (int)WeaponType.Melee && index >= (int)WeaponType.None)
+        switch (weapon)
         {
-            WeaponType selectedWeapon = (WeaponType)index;
+            case WeaponType.Primary:
+                return primary;
 
-            bool pass = false;
+            case WeaponType.Secondary:
+                return secondary;
 
-            int repeats = 0;
+            case WeaponType.Melee:
+                return melee;
 
-            while (!pass)
+            case WeaponType.None:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+    public void ChangeWeapon(int index, bool rest = false)
+    {
+        if (index > (int)WeaponType.Melee || index < (int)WeaponType.None)
+        {
+            Debug.LogError($"Objet: {this.gameObject.name}: Script {this.name}: Se trato de cambiar a un arma con indice {index}, el cual no existe.");
+            return;
+        }
+
+        int repeats = 0;
+        int maxRepeats = System.Enum.GetValues(typeof(WeaponType)).Length;
+
+        while (repeats < maxRepeats)
+        {
+            WeaponType selectedWeapon = (WeaponType)LoopIndex(index, (int)WeaponType.None, (int)WeaponType.Melee);
+
+            if (selectedWeapon != activeWeapon && IsValidWeapon(selectedWeapon))
             {
-                if (selectedWeapon != activeWeapon)
-                    switch (selectedWeapon)
-                    {
-                        case WeaponType.Primary:
-                            if (primary)
-                                pass = true;
-                            break;
-
-                        case WeaponType.Secondary:
-                            if (secondary)
-                                pass = true;
-                            break;
-
-                        case WeaponType.Melee:
-                            if (melee)
-                                pass = true;
-                            break;
-
-                        case WeaponType.None:
-                            pass = true;
-                            break;
-                    }
-
-                if (!pass)
-                {
-                    index++;
-
-                    if ((int)activeWeapon == index)
-                        index++;
-
-                    index = LoopIndex(index, (int)WeaponType.None, (int)WeaponType.Melee);
-                    selectedWeapon = (WeaponType)index;
-                    break;
-                }
-
-                repeats++;
-
-                if (repeats > 6)
-                    return;
+                SelectWeapon(selectedWeapon);
+                return;
             }
 
-            SelectWeapon(selectedWeapon);
+            if (rest)
+                index--;
+            else
+                index++;
+
+            repeats++;
         }
-        else
-            Debug.LogError($"Objet: {this.gameObject.name}: Script {this.name}: Se trato de cambiar a un arma con indice {index}, el cual no existe.");
+
     }
 
     public void EquipWeapon(Weapon newWeapon)
@@ -223,7 +201,7 @@ public class WeaponController : MonoBehaviour
 
         newIndex = LoopIndex(newIndex, (int)WeaponType.None, (int)WeaponType.Melee);
 
-        ChangeWeapon(newIndex);
+        ChangeWeapon(newIndex, true);
     }
 
     [ContextMenu("Change Weapon Down")]
@@ -238,26 +216,10 @@ public class WeaponController : MonoBehaviour
 
     public void FireWeapon()
     {
-        switch (activeWeapon)
-        {
-            case WeaponType.Primary:
-                if (primary)
-                    primary.Fire();
-                break;
+        if (!ActiveWeapon)
+            return;
 
-            case WeaponType.Secondary:
-                if (secondary)
-                    secondary.Fire();
-                break;
-
-            case WeaponType.Melee:
-                if (melee)
-                    melee.Fire();
-                break;
-
-            default:
-                break;
-        }
+        ActiveWeapon.Fire();
     }
 
     public void ReloadWeapon()
@@ -278,66 +240,20 @@ public class WeaponController : MonoBehaviour
 
     public void DropWeapon()
     {
+        if (!ActiveWeapon)
+            return;
+
         Vector3 dropPos = weaponPos.position + weaponPos.forward * offSetDrop;
 
-        switch (activeWeapon)
-        {
-            case WeaponType.Primary:
+        ActiveWeapon.transform.position = dropPos;
+        ActiveWeapon.transform.rotation = Quaternion.LookRotation(transform.forward);
 
-                if (!primary)
-                    return;
+        ActiveWeapon.gameObject.layer = 0;
+        ActiveWeapon.transform.SetParent(null, true);
+        ActiveWeapon.OnDrop();
 
-                primary.transform.position = dropPos;
-                primary.transform.rotation = Quaternion.LookRotation(transform.forward);
+        ActiveWeapon = null;
 
-                primary.gameObject.layer = 0;
-                primary.transform.SetParent(null, true);
-                primary.OnDrop();
-
-                primary = null;
-                break;
-
-            case WeaponType.Secondary:
-
-                if (!secondary)
-                    return;
-
-                secondary.transform.position = dropPos;
-                secondary.transform.rotation = Quaternion.LookRotation(transform.forward);
-
-                secondary.gameObject.layer = 0;
-                secondary.transform.SetParent(null, true);
-                secondary.OnDrop();
-
-                secondary = null;
-                break;
-
-            case WeaponType.Melee:
-
-                if (!melee)
-                    return;
-
-                melee.transform.position = dropPos;
-                melee.transform.rotation = Quaternion.LookRotation(transform.forward);
-
-                melee.gameObject.layer = 0;
-                melee.transform.SetParent(null, true);
-                melee.OnDrop();
-
-                melee = null;
-                break;
-
-            default:
-                break;
-        }
-
-        if (primary)
-            SelectWeapon(WeaponType.Primary);
-        else if (secondary)
-            SelectWeapon(WeaponType.Secondary);
-        else if (melee)
-            SelectWeapon(WeaponType.Melee);
-        else
-            SelectWeapon(WeaponType.None);
+        SelectWeapon(WeaponType.None);
     }
 }

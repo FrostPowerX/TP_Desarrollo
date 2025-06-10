@@ -1757,9 +1757,10 @@ MonoBehaviour:
   levelSettingsSOs:
   - {fileID: 11400000, guid: 5a15fa78cd9d5ff40bf4b24ddfadfee3, type: 2}
   - {fileID: 11400000, guid: 066685c7c98b9c542834080f3a6be5e2, type: 2}
+  - {fileID: 11400000, guid: be6ee092b2c9fc74e9aa1707d44c8114, type: 2}
   player: {fileID: 6897336312924034541, guid: 2cf69c54104a8904a916d32ef74b0f69, type: 3}
   UI: {fileID: 4705955753479910171, guid: 7d4abae5fe23cd448973b5d2246544cf, type: 3}
-  usedSettings: 0
+  usedSettings: 2
   activeSceneId: 0
 --- !u!1 &766060217
 GameObject:
@@ -1842,7 +1843,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &766060221
 RectTransform:
